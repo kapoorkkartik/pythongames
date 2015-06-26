@@ -1,12 +1,13 @@
+# http://www.codeskulptor.org/#user40_5DlLxPVEQF_5.py
+
+
 import simplegui
 import random
 
+GROUND_HEIGHT=0
 FRAME_WIDTH=STAGE_WIDTH=GROUND_WIDTH=821
-FRAME_HEIGHT=498
-STAGE_HEIGHT=FRAME_HEIGHT-30
-PADDLE_HEIGHT=STAGE_HEIGHT
-PADDLE_WIDTH=8
-PADDLE_POS=[STAGE_WIDTH/2,PADDLE_HEIGHT]
+STAGE_HEIGHT=498
+FRAME_HEIGHT=STAGE_HEIGHT+GROUND_HEIGHT
 
 image=simplegui.load_image("http://mrnussbaum.com/calendarclowns1/images/game_background.png")
 
@@ -34,15 +35,15 @@ def timer():
     
         
 def draw(canvas):
-    canvas.draw_image(image,[FRAME_WIDTH/2,FRAME_HEIGHT/2],[FRAME_WIDTH,FRAME_HEIGHT],[FRAME_WIDTH/2,FRAME_HEIGHT/2],[FRAME_WIDTH,FRAME_HEIGHT])
-    
+    canvas.draw_image(image,[STAGE_WIDTH/2,STAGE_HEIGHT/2],[STAGE_WIDTH,STAGE_HEIGHT],[STAGE_WIDTH/2,STAGE_HEIGHT/2],[STAGE_WIDTH,STAGE_HEIGHT])
     for ball in list_of_balls:
-        ball.location[1]+=5
+        ball.location[1]+=10
         canvas.draw_circle(ball.location,ball.radius,10,ball.color,ball.color)
-  
+
+ball=Ball("Red",10,50)   
     
 frame=simplegui.create_frame("ball",FRAME_WIDTH,FRAME_HEIGHT)
-timer=simplegui.create_timer(2000,timer)
+timer=simplegui.create_timer(500,timer)
 frame.set_draw_handler(draw)
 frame.start()
 timer.start()
